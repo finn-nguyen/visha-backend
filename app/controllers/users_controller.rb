@@ -7,7 +7,7 @@ class UsersController < ApiController
 
   def create
     @user = User.new(user_params)
-    if (@user.save)
+    if @user.save
       record_created(@user)
     else
       bad_request(@user.errors.messages)
