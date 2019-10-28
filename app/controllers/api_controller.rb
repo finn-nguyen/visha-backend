@@ -1,4 +1,7 @@
 class ApiController < ApplicationController
+  before_action :authenticate 
+  attr_reader :current_user
+
   def record_created(record)
     render(
       json: record,
@@ -25,5 +28,24 @@ class ApiController < ApplicationController
 
   def internal_error(message)
     render json: {error: message}, status: 500
+  end
+
+  protected
+  def authenticate
+    data = JsonWebToken.decode(token)
+    @current_user = User.find(data[:id])
+  rescue Exception
+    unauthorized
+  end
+
+  def logged_in?
+    @current_user.present?
+  end
+
+  private
+  def token
+    header = request.headers['Authorization']
+    info = header.split(' ')
+    info.last if info.first == 'Bearer'
   end
 end
