@@ -9,7 +9,7 @@ class YoutubeCrawler
     views = (page.at(".view-count").try :text || "").strip.split(" ").first
     video = Video.find(video_id)
     video.update(title: title, description: description, views: views)
-  rescue Exception
-    Rails.logger.error("Crawl #{video_link} failed")
+  rescue Exception => error
+    Rails.logger.error("Crawl #{video_link} failed, #{error}")
   end
 end
