@@ -1,10 +1,10 @@
-class UsersController < ApplicationController
+class UsersController < ApiController
   def create
     @user = User.new(user_params)
     if (@user.save)
-      render json: @user, status: 200
+      render_record(@user)
     else
-      render json: {error: @user.errors.messages}, status: 400
+      render_bad_request(@user.errors.messages)
     end
   end
 
