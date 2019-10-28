@@ -1,24 +1,29 @@
 class ApiController < ApplicationController
-  def render_record(record)
+  def record_created(record)
     render(
       json: record,
-      root: 'record'
+      root: 'record',
+      status: 201
     )
   end
 
-  def render_bad_request(message)
+  def bad_request(message)
     render json: { error: message }, status: 400
   end
 
-  def render_resource_not_found
+  def not_found
     render json: { error: 'Not found'}, status: 404
   end
 
-  def render_unauthorized
+  def unauthorized
     render json: { error: 'Unauthorized'}, status: 401
   end
 
-  def render_forbidden
+  def forbidden
     render json: {error: 'Forbidden'}, status: 403
+  end
+
+  def internal_error(message)
+    render json: {error: message}, status: 500
   end
 end
