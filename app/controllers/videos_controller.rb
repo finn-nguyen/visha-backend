@@ -1,10 +1,14 @@
 class VideosController < ApiController
   def index
+    @videos = Video.all.order(:updated_at)
+    records = paginate(@videos)
+    render_records(records)
   end
 
   def create
     @video = Video.new(video_params)
     if @video.save
+      YoutubeCrawler.perform_async(@video.id, @video.link)
       record_created(@video)
     else
       bad_request(@video.errors.messages)

@@ -10,6 +10,15 @@ class ApiController < ApplicationController
     )
   end
 
+  def render_records(records)
+    render(
+      json: records,
+      root: 'records',
+      meta: pagination_info(records),
+      meta_key: 'pagination'
+    )
+  end
+
   def bad_request(message)
     render json: { error: message }, status: 400
   end
@@ -42,10 +51,29 @@ class ApiController < ApplicationController
     @current_user.present?
   end
 
+  def paginate(records)
+    pagination_params
+    records.page(params[:page]).per_page(params[:per_page])
+  end
+
+  def pagination_params
+    params[:page] ||= 1
+    params[:per_page] = params[:per_page] ? [2, params[:per_page].to_i].min : 2
+  end
+
   private
   def token
     header = request.headers['Authorization']
     info = header.split(' ')
     info.last if info.first == 'Bearer'
+  end
+
+  def pagination_info(paginated)
+    {
+      page: params[:page].to_i,
+      per_page: params[:per_page].to_i,
+      page_count: paginated.total_pages,
+      total_count: paginated.total_entries
+    }
   end
 end

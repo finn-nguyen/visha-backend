@@ -5,6 +5,7 @@ class CreateVideos < ActiveRecord::Migration[6.0]
       t.string :link
       t.text :description
       t.uuid :user_id
+      t.integer :views, :default => 0
 
       t.timestamps
     end

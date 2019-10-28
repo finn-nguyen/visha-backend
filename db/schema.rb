@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2019_10_28_072432) do
     t.string "link"
     t.text "description"
     t.uuid "user_id"
+    t.integer "views", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

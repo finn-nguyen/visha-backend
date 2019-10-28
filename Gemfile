@@ -26,6 +26,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'active_model_serializers'
 gem 'jwt', '~> 2.2', '>= 2.2.1'
 gem 'dotenv-rails'
+gem 'sidekiq'
+gem 'mechanize', '~> 2.7', '>= 2.7.6'
+gem 'will_paginate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
