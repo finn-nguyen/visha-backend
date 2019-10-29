@@ -1,4 +1,6 @@
 class VideosController < ApiController
+  skip_before_action :authenticate, :only => [:index]
+
   def index
     @videos = Video.all.order(:updated_at)
     records = paginate(@videos)
