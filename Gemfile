@@ -30,6 +30,7 @@ gem 'sidekiq'
 gem 'mechanize', '~> 2.7', '>= 2.7.6'
 gem 'will_paginate'
 gem 'rack-cors'
+gem 'faker', '~> 2.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -37,7 +38,6 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 4.1', '>= 4.1.2'
   gem 'rspec-rails', '~> 3.9'
   gem 'factory_girl_rails'
-  gem 'faker', '~> 2.6'
 end
 
 group :development do
