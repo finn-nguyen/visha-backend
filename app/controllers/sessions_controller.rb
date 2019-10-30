@@ -5,7 +5,7 @@ class SessionsController < ApiController
   def create
     if @user.present? && @user.authenticate(user_params[:password])
       jwt = JsonWebToken.encode({ id: @user.id})
-      render json: {token: jwt, username: @user.username}, status: 201
+      render json: {token: jwt, username: @user.username, user_id: @user.id}, status: 201
     else
       unauthorized
     end
