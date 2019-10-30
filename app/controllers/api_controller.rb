@@ -58,7 +58,7 @@ class ApiController < ApplicationController
 
   def pagination_params
     params[:page] ||= 1
-    params[:per_page] = params[:per_page] ? [2, params[:per_page].to_i].min : 2
+    params[:per_page] = params[:per_page] ? [20, params[:per_page].to_i].min : 20
   end
 
   private

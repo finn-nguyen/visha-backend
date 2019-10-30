@@ -14,6 +14,7 @@ class SessionsController < ApiController
 
   private
   def find_user
+    return unless user_params[:username].present? && user_params[:password].present?
     @user = User.find_by(username: user_params[:username]) || User.create(user_params)
   end
 

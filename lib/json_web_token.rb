@@ -1,6 +1,6 @@
 class JsonWebToken
-  def self.encode(payload)
-    payload[:expire] = self.expire
+  def self.encode(payload, expire_time = nil)
+    payload[:expire] = expire_time || self.expire
     JWT.encode(payload, self.secret)
   end
 
